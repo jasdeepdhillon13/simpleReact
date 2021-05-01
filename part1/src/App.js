@@ -2,34 +2,33 @@
 
 import React, {useState} from 'react'
 
+const Display = ({counter})=> <div> {counter}</div>
 
-const Hello = ({name,age}) =>{
-
-  const bornYear = () => new Date().getFullYear() - age
-
-  return (
-      <div>
-        <p> Hello {name} , you are {age} years old</p>
-       <p>
-        So were probably born in {bornYear()}
-       </p> 
-       </div> 
-    )
-}
+const Button = ({handleClick, text}) => (
+  <button  onClick={handleClick}>
+      {text}
+    </button>
+  )
 
 const App = (props) => {
   const [counter,setCounter]= useState(0)
-  setTimeout(
-    ()=> setCounter(counter +1), 
-    1000
-  )
 
-  console.log('rendering...', counter)
+  const handleClick = () => {
+    console.log ('clicked')
+  }
+
+  const increaseByOne = () => setCounter(counter +1)
+  const decreaseByOne =()=> setCounter(counter-1)
+  const setToZero = () => setCounter (0)
 
   return (
     <div>
-      {counter}
+      <Display counter ={counter}/>
+      <Button handleClick={increaseByOne} text='plus'/>
+      <Button handleClick={setToZero} text='zero'/>
+      <Button handleClick={decreaseByOne} text='minus'/>
     </div>
+    
   )
 }
 
